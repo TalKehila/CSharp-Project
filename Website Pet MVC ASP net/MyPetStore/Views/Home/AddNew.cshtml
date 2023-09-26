@@ -1,0 +1,100 @@
+﻿@model MyPetStore.Models.Animal
+	<h1>Adding a New Animal</h1>
+
+		<form asp-controller="Home" asp-action="AddNew"  method="post" enctype="multipart/form-data">
+
+		<div class="form-group">
+			<label asp-for="Name">Name</label>
+			<input asp-for="Name" id="Name" class="form-control"/>
+			<span asp-validation-for="Name" class="text-danger"></span>	<br/>
+		</div>
+		<br/>
+		<div class="form-group">
+			<label asp-for="Age">Age</label>
+			<input asp-for="Age" id="Age" class="form-control"  />
+			<span asp-validation-for="Age" class="text-danger"></span>	
+		</div>
+		<br/>
+
+
+
+		<div class="form-group">
+			<label asp-for="Description">Description</label>
+			<input asp-for="Description" id="Description" class="form-control"/>
+			<span asp-validation-for="Description" class="text-danger"></span>	<br/>
+		</div>
+		<br />
+
+
+   <div class="form-group">
+	<label for="Photo">Select Photo from Specific Folder</label>
+	<input type="file" id="Photo" name="Photo" class="form-control"  accept=".png, .jpeg, .jpg" required/>
+	<span asp-validation-for="Photo" class="text-danger"></span>
+</div>
+
+
+
+	<br/>
+		<h4>Add an animal to an existing category or create a new one</h4>
+		<br/>
+		<div class="form-group">
+			<label>Select an option:</label><br>
+			<input type="radio" name="categoryOption" id="existingCategoryOption" value="existing" checked >
+			<label for="existingCategoryOption">Use an existing category</label><br>
+
+			<input type="radio" name="categoryOption" id="newCategoryOption" value="new">
+			<label for="newCategoryOption">Create a new category</label>	<br/>
+		</div>
+
+		<div id="existingCategory" class="form-group">
+			<label>Existing Category Name</label>
+			<select asp-for="CategoryId"  id="CategoryName" class="form-control">
+				<option value="">Select an existing category...</option>
+			@if (ViewBag.Categories != null)
+			{
+				foreach (var category in ViewBag.Categories)
+				{
+												<option value="@category.CategoryId">@category.Name</option>
+				}
+			}
+			</select>
+			<span asp-validation-for="CategoryId" class="text-danger"></span>	<br/>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="Category.Name">New Category</label> 
+			<input asp-for="Category.Name" id="categoryName" class="form-control"  />
+			<span asp-validation-for="Category.Name" class="text-danger"></span><br/>
+		</div>
+
+
+		<br/>
+		<input type="hidden" asp-for="AnimalId"/>
+		<button type="submit" class="btn btn-primary">Create</button>
+	</form>
+
+
+
+
+<script>
+	// Function to enable/disable the dropdown and text input based on radio button selection
+	function toggleDropdown() {
+		var existingCategoryOption = document.getElementById("existingCategoryOption");
+		var existingCategoryDropdown = document.getElementById("CategoryName");
+		var newCategoryOption = document.getElementById("newCategoryOption");
+		var newCategoryInput = document.getElementById("categoryName");
+
+		existingCategoryOption.addEventListener("change", function () {
+			existingCategoryDropdown.disabled = false;
+			newCategoryInput.disabled = true;
+		});
+		newCategoryOption.addEventListener("change", function () {
+			newCategoryInput.disabled = false;
+			existingCategoryDropdown.disabled = true;
+		});
+		// Initially, disable the new category input
+		newCategoryInput.disabled = true;
+	}
+	// Call the function when the document is loaded
+	document.addEventListener("DOMContentLoaded", toggleDropdown);
+</script>

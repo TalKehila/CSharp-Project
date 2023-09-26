@@ -1,0 +1,39 @@
+﻿@using MyPetStore.Models 
+@model MyPetStore.Data.MyData
+
+@{
+    ViewBag.Title = "Admin Page";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h2>@ViewBag.Title</h2>
+
+    @foreach(var animal in Model.animals)
+    {
+        <table>
+           <td>
+                <tr>        
+                    @animal.Name 
+                </tr>
+                <tr>        
+                    <td><a asp-controller="Home" asp-action="Edit" asp-route-animalId="@animal.AnimalId"> Edit animal </a></td>                  
+                </tr>
+            </td>
+        </table>
+                   
+    }
+    <a asp-controller="Home" asp-action="AddNew" class="btn btn-primary"> Add New Animal </a>
+
+   @* <a asp-controller="Home" asp-action="Edit" class="btn btn-primary">Edit An Animal</a>*@
+
+    <a asp-controller="Home" asp-action="Delete" class="btn btn-primary"> Go To Delete Page</a>
+    
+</body>
+</html>

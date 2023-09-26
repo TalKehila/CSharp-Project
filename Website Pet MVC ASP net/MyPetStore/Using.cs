@@ -1,0 +1,9 @@
+﻿global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using MyPetStore.Data;
+global using MyPetStore.Models;
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using MyPetStore.Validation;
+global using Microsoft.CodeAnalysis.CSharp.Syntax;
+global using Microsoft.AspNetCore.Hosting;
